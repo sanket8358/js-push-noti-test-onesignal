@@ -3,7 +3,10 @@ package com.pushnotification.controller;
 import com.pushnotification.model.OneSignalPushNotification;
 import com.pushnotification.repository.OneSignalPushNotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+import org.unbescape.html.HtmlEscape;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,6 +19,9 @@ import java.util.Map;
 @RestController
 @RequestMapping("/pushnotification")
 public class OneSignalPushNotificationController {
+
+    private final RestTemplate restTemplate = new RestTemplate();
+
 
     @Autowired
     private OneSignalPushNotificationRepository repository;
@@ -40,6 +46,14 @@ public class OneSignalPushNotificationController {
         notification.setIdOneSignal(userId);
         notification.setUserName("User: " + userId);
         repository.save(notification);
+    }
+
+
+    @Scheduled(fixedDelay = 30_000)
+    public void sendChuckQuotes() {
+        IcndbJoke joke = this.restTemplate.getForObject("http://api.icndb.com/jokes/random",
+                IcndbJoke.class);
+        PushNotificationOptions.sendMessageToAllUsers(HtmlEscape.unescapeHtml(joke.getValue().getJoke()));
     }
 
     @GetMapping("/getUsers")
