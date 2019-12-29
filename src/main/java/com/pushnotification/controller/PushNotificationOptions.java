@@ -39,7 +39,7 @@ public class PushNotificationOptions {
 
             System.out.println("strJsonBody:\n" + strJsonBody);
 
-            byte[] sendBytes = strJsonBody.getBytes("UTF-8");
+            byte[] sendBytes = strJsonBody.getBytes("UTF-8" );
             con.setFixedLengthStreamingMode(sendBytes.length);
 
             OutputStream outputStream = con.getOutputStream();
