@@ -49,7 +49,7 @@ public class OneSignalPushNotificationController {
     }
 
 
-    @Scheduled(fixedDelay = 30_000)
+    @Scheduled(fixedRate=30*60*1000)
     public void sendChuckQuotes() {
         IcndbJoke joke = this.restTemplate.getForObject("http://api.icndb.com/jokes/random",
                 IcndbJoke.class);
