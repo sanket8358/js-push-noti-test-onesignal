@@ -3,27 +3,21 @@ package com.pushnotification.model;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by Weslei Dias.
- */
-@Entity(name="userNotifications")
-public class OneSignalPushNotification {
+@Entity(name = "broadcastedNotifications")
+public class BroadCastedNotifications {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="notificationId")
+    @Column(name = "notificationId")
     private Long notificationId;
 
-    @Column(name="userRegistrationId")
-    private String userRegistrationId;
-
-    @Column(name="title")
+    @Column(name = "title")
     private String title;
 
-    @Column(name="message")
+    @Column(name = "message")
     private String message;
 
-    @Column(name="dateTime")
+    @Column(name = "dateTime")
     private Date dateTime;
 
     public Long getNotificationId() {
@@ -32,14 +26,6 @@ public class OneSignalPushNotification {
 
     public void setNotificationId(Long notificationId) {
         this.notificationId = notificationId;
-    }
-
-    public String getUserRegistrationId() {
-        return userRegistrationId;
-    }
-
-    public void setUserRegistrationId(String userRegistrationId) {
-        this.userRegistrationId = userRegistrationId;
     }
 
     public String getTitle() {

@@ -9,12 +9,12 @@ import java.util.Scanner;
 /**
  * Create by Weslei Dias.
  **/
-public class PushNotificationOptions {
+class PushNotificationOptions {
 
-    public static final String REST_API_KEY = "N2E5ZDZkYTMtMmIwZS00YWM4LTllNzgtYTVkZDkwMTAxN2Vl";
-    public static final String APP_ID = "a800226f-5615-4e7f-9545-9fed8b2b5ee4";
+    private static final String REST_API_KEY = "N2E5ZDZkYTMtMmIwZS00YWM4LTllNzgtYTVkZDkwMTAxN2Vl";
+    private static final String APP_ID = "a800226f-5615-4e7f-9545-9fed8b2b5ee4";
 
-    public static void sendMessageToAllUsers(String message) {
+    static void sendMessageToAllUsers(String title, String message) {
         try {
             String jsonResponse;
 
@@ -33,6 +33,7 @@ public class PushNotificationOptions {
                     +   "\"app_id\": \""+ APP_ID +"\","
                     +   "\"included_segments\": [\"All\"],"
                     +   "\"data\": {\"foo\": \"bar\"},"
+                    +   "\"headings\":{\"en\": \""+ title +"\"},"
                     +   "\"contents\": {\"en\": \""+ message +"\"}"
                     + "}";
 
@@ -72,8 +73,8 @@ public class PushNotificationOptions {
         return jsonResponse;
     }
 
-    public static void sendMessageToUser(
-            String message, String userId) {
+    static void sendMessageToUser(
+            String title, String message, String userId) {
         try {
             String jsonResponse;
 
@@ -91,6 +92,7 @@ public class PushNotificationOptions {
                     +   "\"app_id\": \""+ APP_ID +"\","
                     +   "\"include_player_ids\": [\""+ userId +"\"],"
                     +   "\"data\": {\"foo\": \"bar\"},"
+                    +   "\"headings\":{\"en\": \""+ title +"\"},"
                     +   "\"contents\": {\"en\": \""+ message +"\"}"
                     + "}";
 

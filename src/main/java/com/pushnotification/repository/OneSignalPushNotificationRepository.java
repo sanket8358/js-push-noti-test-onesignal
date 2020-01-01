@@ -1,5 +1,6 @@
 package com.pushnotification.repository;
 
+import com.pushnotification.model.BroadCastedNotifications;
 import com.pushnotification.model.OneSignalPushNotification;
 import org.springframework.data.jpa.repository.JpaRepository;
 
