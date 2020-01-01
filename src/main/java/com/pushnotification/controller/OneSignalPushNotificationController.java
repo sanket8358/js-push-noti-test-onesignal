@@ -49,11 +49,11 @@ public class OneSignalPushNotificationController {
     }
 
 
-    @Scheduled(fixedRate=30*60*1000)
+    @Scheduled(fixedDelay=30*60*1000)
     public void sendChuckQuotes() {
         IcndbJoke joke = this.restTemplate.getForObject("http://api.icndb.com/jokes/random",
                 IcndbJoke.class);
-        PushNotificationOptions.sendMessageToAllUsers(HtmlEscape.unescapeHtml(joke.getValue().getJoke()));
+        PushNotificationOptions.sendMessageToAllUsers(HtmlEscape.unescapeHtml(joke.getValue().getJoke().replaceAll("\"","")));
     }
 
     @GetMapping("/getUsers")
